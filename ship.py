@@ -29,4 +29,4 @@ class Ship:
         if self.moving_left and self.rect.left > self.screen_rect.left:
             self.center -= self.ai_settings.ship_speed_factor
         
-        self.rect.centerx = self.center
+        self.rect.centerx = int(self.center)
