@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 import game_functions as gf
+from pygame.sprite import Group
 
 def run_game() -> None:
     pygame.init()
@@ -17,13 +18,19 @@ def run_game() -> None:
     
     ship = Ship(screen, ai_settings)
     
+    bullets = Group()
+    
     while True:
-        gf.check_events(ship)
-
+        gf.check_events(ai_settings, screen, ship, bullets)
+        
         # Atualiza o movimento da espaçonave
         ship.update()
+         
+        bullets.update()
+        
+        gf.update_bullets(bullets)
 
-        gf.update_screen(ai_settings, screen, ship)
+        gf.update_screen(ai_settings, screen, ship, bullets)
     
 
 if __name__ == "__main__":
